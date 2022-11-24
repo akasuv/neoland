@@ -2,51 +2,27 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { Octokit } from "octokit";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import LoadingIcons from "react-loading-icons";
-
-const octokit = new Octokit({
-  auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
-});
-
-const getRepoStats = async (author: string, repoName: string) => {
-  return await octokit.request("GET /repos/{owner}/{repo}", {
-    owner: author,
-    repo: repoName,
-  });
-};
 
 export type PluginCardProps = {
   name: string;
   description: string;
   author: string;
   link: string;
+  lastUpdated: string;
+  stars: number;
+  avatar: string;
 };
 
-const PluginCard = ({ name, description, author, link }: PluginCardProps) => {
-  const [avatar, setAvatar] = React.useState("");
-  const [stars, setStars] = React.useState(0);
-  const [lastUpdated, setLastUpdated] = React.useState("-");
-
-  React.useEffect(() => {
-    if (author && name) {
-      try {
-        (async () => {
-          const res = await getRepoStats(author, name);
-          console.log(res);
-          setStars(res.data.stargazers_count);
-          setLastUpdated(
-            formatDistanceToNow(new Date(res.data.updated_at), {
-              addSuffix: true,
-            })
-          );
-          setAvatar(res.data.owner.avatar_url);
-        })();
-      } catch (error) {}
-    }
-  }, [author, name]);
-
+const PluginCard = ({
+  name,
+  description,
+  author,
+  link,
+  lastUpdated,
+  stars,
+  avatar,
+}: PluginCardProps) => {
   return (
     <div className="card bg-base-100 shadow-xl w-[800px]  mx-auto">
       <div className="card-body flex flex-row justify-between">
@@ -77,7 +53,13 @@ const PluginCard = ({ name, description, author, link }: PluginCardProps) => {
         <div className="stat">
           <div className="stat-title">Last Updated </div>
           <div className="flex">
-            <div className="stat-value text-primary text-xl">{lastUpdated}</div>
+            <div className="stat-value text-primary text-xl">
+              {lastUpdated
+                ? formatDistanceToNow(new Date(lastUpdated), {
+                    addSuffix: true,
+                  })
+                : "-"}
+            </div>
           </div>
         </div>
 
@@ -101,16 +83,7 @@ const PluginCard = ({ name, description, author, link }: PluginCardProps) => {
     </div>
   );
 };
-export default function Home() {
-  const [plugins, setPlugins] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
-    fetch("/api/hello")
-      .then((res) => res.json())
-      .then((data) => setPlugins(data))
-      .finally(() => setLoading(false));
-  }, []);
-
+export default function Home({ data = [] }: any) {
   return (
     <div className="bg-neutral min-h-screen">
       <Head>
@@ -122,14 +95,9 @@ export default function Home() {
         <h1 className="text-5xl font-bold ">NeoLand</h1>
       </header>
       <main className="flex flex-col gap-y-4">
-        {loading ? (
-          <div className="flex flex-col items-center h-[500px] pt-40 gap-y-8">
-            <LoadingIcons.Puff stroke="#4ade80" />
-            <p className="text-green-400">Looooooading...</p>
-          </div>
-        ) : (
-          plugins.map((item) => <PluginCard {...(item as PluginCardProps)} />)
-        )}
+        {data.map((item: any) => (
+          <PluginCard {...(item as PluginCardProps)} />
+        ))}
       </main>
       <footer className={styles.footer}>
         <a
@@ -145,4 +113,12 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const data = await fetch("https://neoland.vercel.app/api/hello").then((res) =>
+    res.json()
+  );
+
+  return { props: { data } };
 }

@@ -45,7 +45,7 @@ export default async function handler(
       item.children[0].href.startsWith("http")
     );
 
-    const data = Array.prototype.map.call(filtered, (item: any) => {
+    let data = Array.prototype.map.call(filtered, (item: any) => {
       return {
         name: item.children[0].textContent.split("/")[1],
         author: item.children[0].textContent.split("/")[0],
@@ -54,8 +54,27 @@ export default async function handler(
       };
     });
 
+    let additional = {};
+    try {
+      additional = await getRepoStats(data.author, data.name);
+
+      data = {
+        ...data,
+        stars: additional.dta.stargazers_count,
+        lastUpdated: additional.data.updated_at,
+        avatar: additional.data.owner.avatar_url,
+      };
+    } catch (err) {}
+
     return data;
   };
+
+  async function getRepoStats(author: string, repoName: string) {
+    return await octokit.request("GET /repos/{owner}/{repo}", {
+      owner: author,
+      repo: repoName,
+    });
+  }
 
   async function mdToHTML(md: any) {
     const file = await unified()
