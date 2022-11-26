@@ -41,8 +41,11 @@ export default async function handler(
     const html = await mdToHTML(content);
     const dom = new JSDOM(html);
     const listItems = dom.window.document.querySelectorAll("li");
-    const filtered = Array.prototype.filter.call(listItems, (item) =>
-      item.children[0].href.startsWith("http")
+    const filtered = Array.prototype.filter.call(
+      listItems,
+      (item) =>
+        item.children[0].href.startsWith("http") &&
+        item.children[0].href.includes("github")
     );
 
     let data = Array.prototype.map.call(filtered, (item: any) => {
