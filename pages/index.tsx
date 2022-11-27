@@ -131,8 +131,6 @@ export async function getStaticProps() {
     res.json()
   );
 
-  data.forEach((item: any) => console.log(item));
-
   const additionalData = data.map(
     async (item: any) => await getRepoStats(item.author, item.name)
   );
