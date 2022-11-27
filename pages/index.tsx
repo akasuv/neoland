@@ -117,34 +117,38 @@ export default function Home({ data = [] }: any) {
   );
 }
 
-// export async function getStaticProps() {
-//   const octokit = new Octokit({
-//     auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
-//   });
-//   async function getRepoStats(author: string, repoName: string) {
-//     return await octokit.request("GET /repos/{owner}/{repo}", {
-//       owner: author,
-//       repo: repoName,
-//     });
-//   }
-//   let data = await fetch("https://neoland.vercel.app/api/hello").then((res) =>
-//     res.json()
-//   );
-//
-//   const additionalData = data.map(
-//     async (item: any) => await getRepoStats(item.author, item.name)
-//   );
-//
-//   const res = await Promise.allSettled(additionalData);
-//
-//   res.forEach((item, idx) => {
-//     data[idx] = {
-//       ...data[idx],
-//       stars: item.value?.data?.stargazers_count || 0,
-//       lastUpdated: item.value?.data?.updated_at || null,
-//       avatar: item.value?.data?.owner.avatar_url || null,
-//     };
-//   });
-//
-//   return { props: { data } };
-// }
+export async function getStaticProps() {
+  const octokit = new Octokit({
+    auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
+  });
+  async function getRepoStats(author: string, repoName: string) {
+    return await octokit.request("GET /repos/{owner}/{repo}", {
+      owner: author,
+      repo: repoName,
+    });
+  }
+  let data = await fetch("https://neoland.vercel.app/api/hello").then((res) =>
+    res.json()
+  );
+
+  data.forEach((item: any) => console.log(item));
+
+  const additionalData = data.map(
+    async (item: any) => await getRepoStats(item.author, item.name)
+  );
+
+  const res = await Promise.allSettled(additionalData);
+
+  res.forEach((item) => console.log(item));
+
+  res.forEach((item, idx) => {
+    data[idx] = {
+      ...data[idx],
+      stars: item.value?.data?.stargazers_count,
+      lastUpdated: item.value?.data?.updated_at,
+      avatar: item.value?.data?.owner.avatar_url,
+    };
+  });
+
+  return { props: { data } };
+}
