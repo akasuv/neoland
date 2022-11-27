@@ -100,17 +100,19 @@ export default function Home({ data = [] }: any) {
         <meta name="description" content="All about NeoVim" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="px-8 py-16 flex flex-col items-center relative gap-y-4">
+      <header className="px-8 py-16 pt-24 md:pt-16 flex flex-col items-center relative gap-y-4">
         <h1 className="text-5xl font-black font-hubot flex-1 text-center">
           NeoLand
         </h1>
-        <p>
+        <p className="text-center">
           " NeoLand is a collection of plugins, themes and other resources for
           NeoVim. "
         </p>
-        <p>👆 GitHub Copilot said so, guess we've got lots to do.</p>
+        <p className="text-center">
+          👆 GitHub Copilot said so, guess we've got lots to do.
+        </p>
         <a
-          className="btn btn-outline btn-active gap-2 absolute right-16"
+          className="btn btn-outline btn-active gap-2 absolute right-8  md:right-16 top-6 md:top-16"
           href="https://github.com/akasuv/neoland"
           target="_blank"
           rel="noreferrer"
