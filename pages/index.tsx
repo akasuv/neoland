@@ -139,8 +139,6 @@ export async function getStaticProps() {
 
   const res = await Promise.allSettled(additionalData);
 
-  res.forEach((item) => console.log(item));
-
   res.forEach((item, idx) => {
     data[idx] = {
       ...data[idx],
