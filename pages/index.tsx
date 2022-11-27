@@ -108,7 +108,7 @@ export default function Home({ data = [] }: any) {
           " NeoLand is a collection of plugins, themes and other resources for
           NeoVim. "
         </p>
-        <p>👆 GitHub Copilot said so, I guess we've got lots do.</p>
+        <p>👆 GitHub Copilot said so, I guess we've got lots to do.</p>
         <a
           className="btn btn-outline btn-active gap-2 absolute right-16"
           href="https://github.com/akasuv/neoland"
