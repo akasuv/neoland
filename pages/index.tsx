@@ -11,19 +11,19 @@ export default function Home({ data = [] }: any) {
         <meta name="description" content="All about NeoVim" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="py-16 md:pt-20 flex flex-col items-center relative gap-y-4">
-        <h1 className="text-5xl font-black font-hubot flex-1 text-center ">
+      <header className="py-16 pt-28 md:pt-40 flex flex-col items-center relative gap-y-4  relative h-[500px] md:h-screen">
+        <h1 className="text-5xl font-black font-hubot  text-center ">
           NeoLand
         </h1>
         <p className="text-center">
           Everything about Neovim, Let the wonderland thrive.
         </p>
-        <div className="form-control w-full max-w-[800px] mt-4">
+        <div className="form-control w-full max-w-[800px] mt-4 px-16">
           <div className="input-group w-full">
             <input
               type="text"
               placeholder="find the magic"
-              className="input inputbordered grow"
+              className="input input-bordered grow"
             />
             <button className="btn btn-square">
               <svg
@@ -46,13 +46,15 @@ export default function Home({ data = [] }: any) {
         <div className="pt-10">
           <Hero />
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-          <path
-            fill="#1eb854"
-            fill-opacity="1"
-            d="M0,32L34.3,53.3C68.6,75,137,117,206,117.3C274.3,117,343,75,411,85.3C480,96,549,160,617,202.7C685.7,245,754,267,823,282.7C891.4,299,960,309,1029,282.7C1097.1,256,1166,192,1234,160C1302.9,128,1371,128,1406,128L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"
-          ></path>
-        </svg>
+        <div className="absolute bottom-0 w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path
+              fill="#1eb854"
+              fill-opacity="1"
+              d="M0,32L34.3,53.3C68.6,75,137,117,206,117.3C274.3,117,343,75,411,85.3C480,96,549,160,617,202.7C685.7,245,754,267,823,282.7C891.4,299,960,309,1029,282.7C1097.1,256,1166,192,1234,160C1302.9,128,1371,128,1406,128L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
         <a
           className="btn btn-outline btn-active gap-2 absolute right-8  md:right-16 top-6 md:top-16"
           href="https://github.com/akasuv/neoland"
