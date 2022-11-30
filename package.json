@@ -10,9 +10,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@supabase/supabase-js": "^2.1.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
     "daisyui": "^2.42.0",
     "date-fns": "^2.29.3",
     "eslint": "8.28.0",
@@ -29,8 +36,7 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "typescript": "4.9.3",
-    "unified": "^10.1.2",
-    "@supabase/supabase-js": "^2.1.1"
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
