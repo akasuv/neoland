@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import jsdom from "jsdom";
@@ -39,7 +38,7 @@ export default async function handler(
       res.text()
     );
     const html = await mdToHTML(content);
-    const dom = new JSDOM(html);
+    const dom = new JSDOM(html as any);
     const listItems = dom.window.document.querySelectorAll("li");
     const filtered = Array.prototype.filter.call(
       listItems,
@@ -48,7 +47,7 @@ export default async function handler(
         item.children[0].href.includes("github")
     );
 
-    let data = Array.prototype.map.call(filtered, (item: any) => {
+    let data: any = Array.prototype.map.call(filtered, (item: any) => {
       return {
         name: item.children[0].textContent.split("/")[1],
         author: item.children[0].textContent.split("/")[0],
@@ -57,17 +56,19 @@ export default async function handler(
       };
     });
 
-    let additional = {};
+    let additional: any = {};
     try {
       additional = await getRepoStats(data.author, data.name);
 
       data = {
         ...data,
-        stars: additional.dta.stargazers_count,
+        stars: additional.data.stargazers_count,
         lastUpdated: additional.data.updated_at,
         avatar: additional.data.owner.avatar_url,
       };
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
 
     return data;
   };
