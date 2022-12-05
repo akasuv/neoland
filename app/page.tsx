@@ -47,11 +47,6 @@ export default async function Home() {
 
   return (
     <div className="bg-neutral min-h-screen pb-16">
-      <Head>
-        <title>NeoLand</title>
-        <meta name="description" content="All about NeoVim" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <header className="pt-8 pb-16 px-4 flex flex-col items-center relative gap-y-4  relative ">
         <div className="w-full flex justify-end">
           <button
