@@ -9,10 +9,12 @@ import React from "react";
 import Link from "next/link";
 
 const Card = ({ title, icon }: { title: string; icon: IconDefinition }) => (
-  <div className="card h-20 w-30 md:h-40 md:w-60 border border-primary text-primary-content rounded-md hover:bg-primary text-primary hover:text-white transition-all duration-500 cursor-pointer">
-    <div className="card-body p-3 flex flex-col items-center justify-center gap-y-4">
-      <FontAwesomeIcon icon={icon} className="text-xl md:text-3xl" />
-      <p className="font-bold text-sm md:text-2xl grow-0">{title}</p>
+  <div className="h-30 w-48 flex flex-col  border shadow-sm rounded-xl  bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+    <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-3 gap-y-3">
+      <FontAwesomeIcon icon={icon} size="2x" />
+      <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+        {title}
+      </h3>
     </div>
   </div>
 );
@@ -24,7 +26,7 @@ const sections = [
 ];
 
 const Hero = () => (
-  <div className="flex gap-x-4  w-full max-w-[800px]">
+  <div className="flex gap-x-4 w-full max-w-[800px]">
     {sections.map((section) => (
       <Link href={section.href}>
         <Card title={section.title} icon={section.icon} />
