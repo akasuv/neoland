@@ -9,12 +9,10 @@ import React from "react";
 import Link from "next/link";
 
 const Card = ({ title, icon }: { title: string; icon: IconDefinition }) => (
-  <div className="h-30 w-48 flex flex-col  border shadow-sm rounded-xl  bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+  <div className="h-30 w-48 flex flex-col  border shadow-sm rounded-xl  bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 border-gray-700 shadow-slate-700/[.7]">
     <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-3 gap-y-3">
       <FontAwesomeIcon icon={icon} size="2x" />
-      <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-        {title}
-      </h3>
+      <h3 className="text-lg font-bold">{title}</h3>
     </div>
   </div>
 );

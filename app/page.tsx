@@ -51,7 +51,7 @@ export default async function Home() {
         <div className="w-full flex justify-end">
           <a
             href="https://github.com/akasuv/neoland"
-            className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-gray-100 border border-transparent font-semibold text-gray-500 hover:text-white hover:bg-gray-500 focus:outline-none focus:ring-2 ring-offset-white focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:text-white dark:focus:ring-offset-gray-800"
+            className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-gray-600 focus:ring-offset-gray-800"
           >
             <FontAwesomeIcon icon={faGithub} size="lg" />
             <p>GitHub</p>
@@ -71,7 +71,7 @@ export default async function Home() {
                 value="🚧 [WIP] Search upcoming..."
                 id="hs-trailing-button-add-on-with-icon-and-button"
                 name="hs-trailing-button-add-on-with-icon-and-button"
-                className="py-3 px-0 md:px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-l-md text-sm focus:z-10 focus:border-green-500 focus:ring-green-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                className="py-3 px-0 md:px-4 pl-11 block w-full shadow-sm rounded-l-md text-sm focus:z-10 focus:border-green-500 focus:ring-green-500 bg-gray-800 border-gray-700 text-gray-400"
               />
               <button
                 type="button"
@@ -93,7 +93,9 @@ export default async function Home() {
           .filter((item) => item.tag.toLowerCase() === "colorscheme")
           .map((item: any) => (
             <div className="flex flex-col gap-y-4 px-8 mx-auto">
-              <h2 className="text-2xl font-semibold">Color Schemes</h2>
+              <h2 className="text-2xl font-semibold text-white">
+                Color Schemes
+              </h2>
               <div className="flex flex-wrap w-full gap-4 justify-center">
                 {item.plugins.slice(0, 8).map((plugin: any) => (
                   <ColorSchemeCard {...plugin} />

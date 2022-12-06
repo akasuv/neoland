@@ -64,21 +64,19 @@ const ColorShemeCard = ({
   }, [isOpen]);
 
   return (
-    <div className="flex grow shrink flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] w-[300px]">
+    <div className="flex grow shrink flex-col border shadow-sm rounded-xl bg-gray-800 border-gray-700 shadow-slate-700/[.7] w-[300px]">
       <div className="p-4 md:p-7 flex flex-col justify-between grow gap-y-4">
-        <div>
+        <div className="text-white">
           <FontAwesomeIcon icon={faPalette} size="2x" />
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white mt-4">
-            {name}
-          </h3>
-          <p className="mt-2 text-gray-800 dark:text-gray-400">{description}</p>
+          <h3 className="text-lg font-bold text-white mt-4">{name}</h3>
+          <p className="mt-2 text-gray-400">{description}</p>
         </div>
         <div className="flex justify-between items-center">
           <button
             onClick={() => setIsOpen(true)}
             data-hs-overlay={`#p-${id}`}
             type="button"
-            className="py-3 px-4 grow-0 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-500 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-offset-gray-800"
+            className="py-3 px-4 grow-0 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-white focus:outline-none focus:ring-2 focus:ring-gray-500  transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800"
           >
             View
           </button>
@@ -111,14 +109,12 @@ const ColorShemeCard = ({
         className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
       >
         <div className="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:w-full md:w-3/4 p-4 pt-8 sm:mx-auto h-[calc(100%-3.5rem)]">
-          <div className="max-h-full w-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-            <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
-              <h3 className="font-bold text-gray-800 dark:text-white">
-                {name}
-              </h3>
+          <div className="max-h-full w-full overflow-hidden flex flex-col border shadow-sm rounded-xl bg-gray-800 border-gray-700 shadow-slate-700/[.7]">
+            <div className="flex justify-between items-center py-3 px-4 border-b border-gray-700">
+              <h3 className="font-bold text-white">{name}</h3>
               <button
                 type="button"
-                className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+                className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm focus:ring-gray-700 focus:ring-offset-gray-800"
                 data-hs-overlay={`#p-${id}`}
               >
                 <span className="sr-only">Close</span>
@@ -139,7 +135,7 @@ const ColorShemeCard = ({
             </div>
             <div className="p-4 overflow-y-auto">
               {isLoading ? (
-                <div className="min-h-[30rem] flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <div className="min-h-[30rem] flex flex-col border shadow-sm rounded-xl bg-gray-800 border-gray-700 shadow-slate-700/[.7]">
                   <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
                     <div className="flex justify-center">
                       <div
@@ -180,10 +176,10 @@ const ColorShemeCard = ({
                 )
               )}
             </div>
-            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-700">
               <button
                 type="button"
-                className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium text-gray-700 shadow-sm align-middle focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm bg-gray-800 hover:bg-slate-800 border-gray-700 text-gray-400 hover:text-white focus:ring-offset-gray-800"
                 data-hs-overlay={`#p-${id}`}
               >
                 Close

@@ -30,6 +30,9 @@ a {
 }
 
 @layer base {
+  html {
+    @apply text-white;
+  }
   @font-face {
     font-family: "Mona Sans";
     src: url("../public/Mona-Sans.woff2") format("woff2 supports variations"),
