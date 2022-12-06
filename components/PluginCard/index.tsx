@@ -163,7 +163,7 @@ const Plugin = ({
             </div>
             <div className="p-4 overflow-y-auto">
               {isLoading ? (
-                <div className="min-h-[30rem] flex flex-col border shadow-sm rounded-xl bg-gray-800 border-gray-700 shadow-slate-700/[.7]">
+                <div className="h-screen flex flex-col border shadow-sm rounded-xl bg-gray-800 border-gray-700 shadow-slate-700/[.7]">
                   <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
                     <div className="flex justify-center">
                       <div

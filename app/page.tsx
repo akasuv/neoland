@@ -5,6 +5,7 @@ import Head from "next/head";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL as string,
@@ -42,7 +43,6 @@ async function getPlugins() {
 }
 
 export default async function Home() {
-  const tags = await getTags();
   const { data } = await getPlugins();
 
   return (
@@ -61,7 +61,6 @@ export default async function Home() {
           NeoLand
         </h1>
         <div className="pt-10 w-full md:w-1/2">
-          {/* <Hero /> */}
           <div>
             <label className="sr-only">Label</label>
             <div className="relative flex rounded-md shadow-sm">
@@ -82,10 +81,8 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="flex gap-x-4 flex-wrap w-3/4 justify-center pt-4 gap-y-4">
-          {tags?.data.slice(0, 10).map((tag) => (
-            <Tag text={tag.primary} />
-          ))}
+        <div className="mt-4 w-full">
+          <Hero />
         </div>
       </header>
       <div className="w-full pb-8">
@@ -93,14 +90,23 @@ export default async function Home() {
           .filter((item) => item.tag.toLowerCase() === "colorscheme")
           .map((item: any) => (
             <div className="flex flex-col gap-y-4 px-8 mx-auto">
-              <h2 className="text-2xl font-semibold text-white">
-                Color Schemes
-              </h2>
-              <div className="flex flex-wrap w-full gap-4 justify-center">
-                {item.plugins.slice(0, 8).map((plugin: any) => (
+              <div className="flex items-center gap-x-4 w-full">
+                <h2 className="text-2xl font-semibold text-white">
+                  Color Schemes
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4">
+                {item.plugins.slice(0, 6).map((plugin: any) => (
                   <ColorSchemeCard {...plugin} />
                 ))}
               </div>
+              <a
+                className="mt-4 py-3 self-center max-w-fit bg-gradient-to-r from-sky-500 to-indigo-500 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm "
+                href="/color-schemes"
+              >
+                All Color Schemes
+                <FontAwesomeIcon icon={faAngleRight} size="sm" />
+              </a>
             </div>
           ))}
       </div>
