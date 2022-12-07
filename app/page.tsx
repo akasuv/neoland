@@ -110,17 +110,24 @@ export default async function Home() {
             </div>
           ))}
       </div>
-      <main className="w-full">
+      <main className="w-full flex flex-col items-center">
         {data
-          .filter((item) => item.tag.toLowerCase() !== "colorscheme")
+          .filter((item) => item.tag.toLowerCase() == "plugin manager")
           .map((item: any) => (
-            <div className="flex flex-col gap-y-4 p-8 mx-auto">
+            <div className="flex flex-col gap-y-4 p-8 mx-auto w-full">
               <h2 className="text-2xl font-semibold">{item.tag}</h2>
               {item.plugins.map((plugin: any) => (
                 <PluginCard {...plugin} />
               ))}
             </div>
           ))}
+        <a
+          className="mt-4 py-3 self-center max-w-fit bg-gradient-to-r from-sky-500 to-indigo-500 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm "
+          href="/color-schemes"
+        >
+          Plugin Hunt !
+          <FontAwesomeIcon icon={faAngleRight} size="sm" />
+        </a>
       </main>
     </div>
   );
