@@ -27,7 +27,7 @@ export default async function Home() {
     <div className="bg-neutral min-h-screen pb-16">
       <div className="w-full pb-8">
         <div className="flex flex-col gap-y-4 mx-auto">
-          <div className="flex items-center w-full h-60 justify-center bg-gradient-to-t from-sky-500 to-indigo-500">
+          <div className="flex items-center w-full h-60 justify-center bg-gradient-to-t from-sky-500 to-indigo-500 px-8">
             <h2 className="text-5xl font-black text-white font-hubot">
               Color Schemes
             </h2>
