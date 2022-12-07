@@ -59,7 +59,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <a href="/color-schemes">
                 <p>Color Schemes</p>
               </a>
-              <a href="https://github.com/akasuv/neoland">
+              <a href="/plugins">
                 <p>Plugins</p>
               </a>
               <a href="https://neovim.io">

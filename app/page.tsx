@@ -123,7 +123,7 @@ export default async function Home() {
           ))}
         <a
           className="mt-4 py-3 self-center max-w-fit bg-gradient-to-r from-sky-500 to-indigo-500 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm "
-          href="/color-schemes"
+          href="/plugins"
         >
           Plugin Hunt !
           <FontAwesomeIcon icon={faAngleRight} size="sm" />

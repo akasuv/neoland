@@ -4,7 +4,7 @@ export type TagProps = {
   onClick: () => void;
 };
 
-const colors = ["gray", "red", "yellow", "green"];
+const colors = ["green"];
 
 const Tag = ({ text, onClick }: TagProps) => {
   const color = colors[Math.floor(Math.random() * colors.length)];
