@@ -5,24 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	const [bgColor, setBgColor] = React.useState("bg-indigo-500");
-	React.useEffect(() => {
-		document.addEventListener("scroll", () => {
-			if (window.scrollY > 10) {
-				setBgColor("bg-slate-900");
-			} else {
-				setBgColor("bg-indigo-500");
-			}
-		});
-	}, []);
 	return (
 		<div>
-			<header
-				className={clsx(
-					"relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm py-4 sticky top-0 transition-colors duration-300",
-					bgColor
-				)}
-			>
+			<header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm py-4 sticky top-0 transition-colors duration-300 bg-slate-900">
 				<nav
 					className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
 					aria-label="Global"

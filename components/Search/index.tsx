@@ -5,8 +5,8 @@ import React from "react";
 import { Tag } from "@/components";
 import type { Plugin } from "@/type";
 
-const ListItem = ({ name, link, tag1 }: Plugin) => (
-	<a href={link} className="w-full">
+const ListItem = ({ name, link, tag1, id }: Plugin) => (
+	<a href={`/plugin/${id}`} className="w-full">
 		<li className="inline-flex w-full items-center justify-between gap-x-2 py-4 px-4 text-sm font-medium -mt-px  first:mt-0 last:rounded-b-lg bg-gray-800  hover:bg-gray-900 text-white hover:rounded-md">
 			<span>{name} </span>
 			<Tag text={tag1} />
@@ -47,8 +47,6 @@ const Search = () => {
 			} else {
 				setNoResult(true);
 			}
-			console.log(data);
-			console.log(error);
 		}
 	};
 
