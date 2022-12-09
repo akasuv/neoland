@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { Hero, PluginCard, Tag, ColorSchemeCard } from "@/components";
+import { Hero, PluginCard, Tag, ColorSchemeCard, Search } from "@/components";
 import React from "react";
 import Head from "next/head";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -44,6 +44,7 @@ async function getPlugins() {
 
 export default async function Home() {
   const { data } = await getPlugins();
+  console.log("data", data);
 
   return (
     <div className="bg-neutral min-h-screen pb-16">
@@ -61,25 +62,7 @@ export default async function Home() {
           NeoLand
         </h1>
         <div className="pt-10 w-full md:w-1/2">
-          <div>
-            <label className="sr-only">Label</label>
-            <div className="relative flex rounded-md shadow-sm">
-              <input
-                type="text"
-                disabled
-                value="🚧 [WIP] Search upcoming..."
-                id="hs-trailing-button-add-on-with-icon-and-button"
-                name="hs-trailing-button-add-on-with-icon-and-button"
-                className="py-3 px-0 md:px-4 pl-11 block w-full shadow-sm rounded-l-md text-sm focus:z-10 focus:border-green-500 focus:ring-green-500 bg-gray-800 border-gray-700 text-gray-400"
-              />
-              <button
-                type="button"
-                className="py-3 px-4 inline-flex flex-shrink-0 justify-center items-center rounded-r-md border border-transparent font-semibold bg-green-300 text-green-900 hover:bg-green-400 focus:z-10 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all text-sm"
-              >
-                Search
-              </button>
-            </div>
-          </div>
+          <Search />
         </div>
         <div className="mt-4 w-full">
           <Hero />

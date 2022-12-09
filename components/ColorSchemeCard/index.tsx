@@ -24,6 +24,7 @@ export type ColorSchemeCardProps = {
   id: string;
 };
 
+("use client");
 const ColorShemeCard = ({
   name,
   description,
