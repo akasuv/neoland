@@ -60,11 +60,11 @@ export default async function Home() {
 						<p>GitHub</p>
 					</a>
 				</div>
-				<h1 className="text-5xl font-black font-hubot  text-center ">
-					NeoLand
-				</h1>
+				<div className="w-1/5">
+					<img src="neoland.svg" width="100%" />
+				</div>
 				<a
-					className="flex items-center gap-x-2 text-green-300"
+					className="flex items-center gap-x-2"
 					href="https://p3rwfxh2k6f.typeform.com/to/e36F7CTp"
 					target="_blank"
 				>
