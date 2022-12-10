@@ -5,16 +5,13 @@ export type TagProps = {
 	onClick?: () => void;
 };
 
-const colors = ["green"];
-
 const Tag = ({ text, onClick }: TagProps) => {
-	const color = colors[Math.floor(Math.random() * colors.length)];
 	return (
 		<a
 			href={`/plugins/${text}`}
 			className={clsx(
 				"inline-flex items-center gap-1.5 py-1 px-3 rounded-md text-xs font-medium",
-				`bg-${color}-100 text-${color}-800`
+				`bg-green-100 text-green-800`
 			)}
 			onClick={onClick}
 		>

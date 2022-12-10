@@ -90,7 +90,7 @@ const Plugin = ({
 						</a>
 					</div>
 				</div>
-				<div className="flex items-center gap-x-4 grow-0 shrink-0">
+				<div className="flex items-center gap-x-4 grow-0 shrink-0 w-full md:w-fit justify-between">
 					<div className="flex gap-x-1">
 						<div>
 							<FontAwesomeIcon icon={faStar} size="1x" />
