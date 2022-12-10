@@ -10,7 +10,8 @@ const colors = ["green"];
 const Tag = ({ text, onClick }: TagProps) => {
 	const color = colors[Math.floor(Math.random() * colors.length)];
 	return (
-		<span
+		<a
+			href={`/plugins/${text}`}
 			className={clsx(
 				"inline-flex items-center gap-1.5 py-1 px-3 rounded-md text-xs font-medium",
 				`bg-${color}-100 text-${color}-800`
@@ -18,7 +19,7 @@ const Tag = ({ text, onClick }: TagProps) => {
 			onClick={onClick}
 		>
 			{text}
-		</span>
+		</a>
 	);
 };
 

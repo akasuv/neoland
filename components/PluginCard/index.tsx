@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { Tag } from "@/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCube, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -114,11 +115,7 @@ const Plugin = ({
 			</div>
 			<div className="mt-4 sm:pl-0 md:pl-12 flex justify-between flex-wrap gap-y-4">
 				<div className="flex gap-x-4">
-					{tag1 && (
-						<span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-green-100 text-green-800">
-							{tag1}
-						</span>
-					)}
+					{tag1 && <Tag text={tag1} />}
 					{tag2 && (
 						<span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-red-100 text-red-800">
 							{tag2}

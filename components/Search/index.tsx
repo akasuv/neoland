@@ -40,7 +40,8 @@ const Search = () => {
 			const { data, error } = await supabase
 				.from("Plugins")
 				.select()
-				.textSearch("tag1", `'${event.target.value}'`);
+				.ilike("name", `%${event.target.value}%`);
+
 			setLoading(false);
 			if (data?.length) {
 				setResult(data);
@@ -63,7 +64,7 @@ const Search = () => {
 						"py-3 px-4 block w-full shadow-sm focus-visible:outline-0 rounded-md bg-gray-800 border-gray-700 text-gray-400",
 						{ "rounded-bl-none rounded-br-none": isFocused || isHovered }
 					)}
-					placeholder="Need some plugins?"
+					placeholder="Looking for plugins?"
 				/>
 				{
 					<ul

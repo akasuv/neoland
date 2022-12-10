@@ -13,10 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 					aria-label="Global"
 				>
 					<div className="flex items-center justify-between">
-						<a
-							className="flex-none text-xl font-semibold dark:text-white"
-							href="/"
-						>
+						<a className="flex-none text-xl font-semibold" href="/">
 							NeoLand
 						</a>
 						<div className="sm:hidden">

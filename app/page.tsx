@@ -5,7 +5,10 @@ import Head from "next/head";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+	faAngleRight,
+	faHandsClapping,
+} from "@fortawesome/free-solid-svg-icons";
 
 const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_URL as string,
@@ -60,7 +63,15 @@ export default async function Home() {
 				<h1 className="text-5xl font-black font-hubot  text-center ">
 					NeoLand
 				</h1>
-				<div className="pt-10 w-full md:w-1/2">
+				<a
+					className="flex items-center gap-x-2 text-green-300"
+					href="https://p3rwfxh2k6f.typeform.com/to/e36F7CTp"
+					target="_blank"
+				>
+					<FontAwesomeIcon icon={faHandsClapping} />
+					<p>Submit your awesome Neovim plugin!</p>
+				</a>
+				<div className="pt-4 w-full md:w-1/2">
 					<Search />
 				</div>
 				<div className="mt-4 w-full">

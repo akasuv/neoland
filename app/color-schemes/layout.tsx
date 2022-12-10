@@ -8,6 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 	const [bgColor, setBgColor] = React.useState("bg-indigo-500");
 	React.useEffect(() => {
 		document.addEventListener("scroll", () => {
+			console.log("scrolling", window.scrollY);
 			if (window.scrollY > 10) {
 				setBgColor("bg-slate-900");
 			} else {
