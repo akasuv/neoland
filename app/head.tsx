@@ -7,14 +7,14 @@ export default function Head() {
 				property="og:description"
 				content="Find the best Neovim resources on NeoLand."
 			/>
-			<meta property="og:image" content="og.svg" />
+			<meta property="og:image" content="/og.svg" />
 			<meta name="twitter:card" content="summary" />
 			<meta name="twitter:title" content="NeoLand" />
 			<meta
 				name="twitter:description"
 				content="Find the best Neovim resources on NeoLand."
 			/>
-			<meta name="twitter:image" content="og.svg" />
+			<meta name="twitter:image" content="/og.svg" />
 
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<link rel="icon" href="/favicon.ico" />
