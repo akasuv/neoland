@@ -4,3 +4,4 @@ export { default as SideMenu } from "./SideMenu";
 export { default as Tag } from "./Tag";
 export { default as ColorSchemeCard } from "./ColorSchemeCard";
 export { default as Search } from "./Search";
+export { default as Analytics } from "./Analytics";

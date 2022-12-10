@@ -21,6 +21,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@vercel/analytics": "^0.1.6",
     "clsx": "^1.2.1",
     "daisyui": "^2.42.0",
     "date-fns": "^2.29.3",
