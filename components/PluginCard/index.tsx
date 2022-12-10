@@ -100,7 +100,7 @@ const Plugin = ({
 					<button
 						type="button"
 						className={clsx(
-							"py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold  focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800",
+							"whitespace-nowrap py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold  focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800",
 							{
 								hidden: !hideReadMe,
 							}

@@ -80,7 +80,7 @@ const ColorShemeCard = ({
 						onClick={() => setIsOpen(true)}
 						data-hs-overlay={`#p-${id}`}
 						type="button"
-						className="py-3 px-4 grow-0 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-white focus:outline-none focus:ring-2 focus:ring-gray-500  transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800"
+						className="whitespace-nowrap py-3 px-4 grow-0 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-white focus:outline-none focus:ring-2 focus:ring-gray-500  transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800"
 					>
 						<FontAwesomeIcon icon={faBolt} />
 						Instant Doc

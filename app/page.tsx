@@ -60,7 +60,7 @@ export default async function Home() {
 						<p>GitHub</p>
 					</a>
 				</div>
-				<div className="w-1/5">
+				<div className="w-[200px]">
 					<img src="neoland.svg" width="100%" />
 				</div>
 				<a
