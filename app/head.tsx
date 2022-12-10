@@ -10,7 +10,7 @@ export default function Head() {
 			<meta property="og:image" content="https://i.imgur.com/sUMHQ5M.png" />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:height" content="600" />
-			<meta name="twitter:card" content="summary" />
+			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content="NeoLand" />
 			<meta
 				name="twitter:description"
