@@ -65,7 +65,7 @@ export default async function Home() {
 				</div>
 				<a
 					className="flex items-center gap-x-2"
-					href="https://p3rwfxh2k6f.typeform.com/to/e36F7CTp"
+					href="https://github.com/akasuv/neoland/issues/new?assignees=&labels=plugin+submit&template=plugin-submit.md&title=New+plugin"
 					target="_blank"
 				>
 					<FontAwesomeIcon icon={faHandsClapping} />
