@@ -1,7 +1,7 @@
 ---
 name: Plugin Submit
 about: Submit your awesome Neovim plugin!
-title: ''
+title: New plugin
 labels: plugin submit
 assignees: ''
 
