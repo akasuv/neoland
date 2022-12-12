@@ -16,5 +16,7 @@ assignees: ''
 ## Tags
 
 ---
+
 Tag reference:
-`Plugin Manager` `LSP` `Completion` `Language` `Syntax` `Snippet` `Register` `Marks` `Search` `Fuzzy Finder` `File Explorer` `Project` `Color` `Colorscheme` `Bars and Lines` `Startup` `Icon` `Media` `Note Taking` `Utility` `Terminal Integration` `Debugging` `Test` `Code Runner` `Neovim Lua Development` `Fennel` `Dependency Management` `Git` `Motion` `Keybinding` `Mouse` `Scrolling` `Editing Support` `Formatting` `Command Line` `Session` `Remote Development` `Split and Window` `Game` `Preconfigured Configuration` `Version Manager` `Programming Languages Support`
+
+`Bars and Lines` `Code Runner` `Color` `Colorscheme` `Command Line` `Completion` `Debugging` `Dependency Management` `Editing Support` `Fennel` `File Explorer` `Formatting` `Fuzzy Finder` `Game` `Git` `Icon` `Keybinding` `LSP` `Language` `Marks` `Media` `Motion` `Mouse` `Neovim Lua Development` `Note Taking` `Plugin Manager` `Preconfigured Configuration` `Programming Languages Support` `Project` `Register` `Remote Development` `Scrolling` `Search` `Session` `Snippet` `Split and Window` `Startup` `Syntax` `Terminal Integration` `Test` `Utility` `Version Manager`
