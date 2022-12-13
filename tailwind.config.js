@@ -15,6 +15,10 @@ module.exports = {
       code: {
         backgroundColor: colors.gray["600"],
         borderRadius: defaultTheme.borderRadius.sm,
+        color: colors.gray["100"],
+      },
+      blockquote: {
+        color: colors.gray["300"],
       },
     },
     extend: {
