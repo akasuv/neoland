@@ -45,6 +45,14 @@ const Plugin = ({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  const transformImageUri = (input: string) =>
+    /^https?:/.test(input)
+      ? input
+      : `${link.replace(
+          "github.com",
+          "raw.githubusercontent.com"
+        )}/master/${input}`;
+
   React.useEffect(() => {
     window.addEventListener("close.hs.overlay", () => {
       setIsOpen(false);
@@ -216,6 +224,7 @@ const Plugin = ({
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
                     children={readMeContent}
+                    transformImageUri={transformImageUri}
                   />
                 )
               )}
@@ -273,6 +282,7 @@ const Plugin = ({
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 children={readMeContent}
+                transformImageUri={transformImageUri}
               />
             </div>
           )
