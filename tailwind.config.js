@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 const tailwindMdBase = require("@geoffcodesthings/tailwind-md-base");
 
 /** @type {import('tailwindcss').Config} */
@@ -10,6 +11,12 @@ module.exports = {
     "node_modules/preline/dist/*.js",
   ],
   theme: {
+    markdownBase: {
+      code: {
+        backgroundColor: colors.gray["600"],
+        borderRadius: defaultTheme.borderRadius.sm,
+      },
+    },
     extend: {
       fontFamily: {
         sans: ["Mona Sans", ...defaultTheme.fontFamily.sans],
