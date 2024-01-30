@@ -20,7 +20,7 @@ const Card = ({ title, icon }: { title: string; icon: IconDefinition }) => (
 
 const sections = [
   { title: "Color Schemes", icon: faPalette, href: "/color-schemes" },
-  { title: "Plugins", icon: faCube, href: "/plugins" },
+  { title: "All Plugins", icon: faCube, href: "/plugins" },
 ];
 
 const Hero = () => (

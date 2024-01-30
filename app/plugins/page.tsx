@@ -1,28 +1,27 @@
-import { createClient } from "@supabase/supabase-js";
-import { Hero, PluginCard, Tag, ColorSchemeCard } from "@/components";
+import { PluginCard } from "@/components";
 import React from "react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-const supabase = createClient(
-	process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-);
+import type { Metadata } from "next";
+import { supabase } from "@/config";
+
+export const metadata: Metadata = {
+  title: "NeoLand - Plugins",
+  description: "The best Neovim plugin resources",
+};
 
 async function getPlugins() {
-	const { data, error } = await supabase.from("Plugins").select();
-	return { data };
+  const { data } = await supabase.from("all_plugins").select();
+
+  return { data };
 }
 
 const Plugins = async () => {
-	const { data } = await getPlugins();
+  const { data } = await getPlugins();
 
-	return (
-		<div className="px-4 flex flex-col gap-y-4 w-full grow-0">
-			{data?.map((plugin: any) => (
-				<PluginCard {...plugin} />
-			))}
-		</div>
-	);
+  return (
+    <div className="px-4 flex flex-col gap-y-4 w-full grow-0">
+      {data?.map((plugin: any) => <PluginCard {...plugin} />)}
+    </div>
+  );
 };
 export default Plugins;

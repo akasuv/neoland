@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.tsx"],
-      "@/type": ["./type.ts"]
+      "@/type": ["./type.ts"],
+      "@/config": ["config/index.ts"]
     },
     "plugins": [
       {

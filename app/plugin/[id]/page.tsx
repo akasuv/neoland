@@ -1,22 +1,36 @@
-import { createClient } from "@supabase/supabase-js";
 import { PluginCard } from "@/components";
+import type { Metadata } from "next";
+import { supabase } from "@/config";
 
-const supabase = createClient(
-	process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-);
+async function getPluginById(id: string) {
+  const { data } = await supabase.from("all_plugins").select().eq("id", id);
 
-const PluginPage = async ({ params }) => {
-	const { data, error } = await supabase
-		.from("Plugins")
-		.select()
-		.eq("id", params.id);
+  return { data };
+}
 
-	return (
-		<div className="p-4">
-			{data && <PluginCard {...data[0]} hideReadMe={false} />}
-		</div>
-	);
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
+
+  const { data } = await getPluginById(id);
+
+  return {
+    title: "NeoLand - " + data?.[0].name,
+    description: "The best Neovim plugin resource, " + data?.[0].description,
+  };
+}
+
+const PluginPage = async ({ params }: Props) => {
+  const { data } = await getPluginById(params.id);
+  return (
+    <div className="p-4">
+      {data && <PluginCard {...data[0]} hideReadMe={false} />}
+    </div>
+  );
 };
 
 export default PluginPage;

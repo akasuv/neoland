@@ -16,7 +16,7 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   const { JSDOM } = jsdom;
 
@@ -31,11 +31,11 @@ export default async function handler(
         owner: "rockerBOO",
         repo: "awesome-neovim",
         path: "README.md",
-      }
+      },
     );
 
     const content = await fetch(res.data.download_url).then((res) =>
-      res.text()
+      res.text(),
     );
     const html = await mdToHTML(content);
     const dom = new JSDOM(html as any);
@@ -44,7 +44,7 @@ export default async function handler(
       listItems,
       (item) =>
         item.children[0].href.startsWith("http") &&
-        item.children[0].href.includes("github")
+        item.children[0].href.includes("github"),
     );
 
     let data: any = Array.prototype.map.call(filtered, (item: any) => {

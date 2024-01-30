@@ -17,13 +17,8 @@ import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 export type PluginProps = {
   name: string;
   description: string;
-  author: string;
   link: string;
-  last_updated: string;
-  stars: number;
-  avatar: string;
-  tag1?: string;
-  tag2?: string;
+  tags: string[];
   id: string;
   hideReadMe?: boolean;
 };
@@ -32,13 +27,8 @@ const Plugin = ({
   id,
   name,
   description,
-  author,
-  link,
-  last_updated,
-  stars,
-  avatar,
-  tag1,
-  tag2,
+  link = "",
+  tags,
   hideReadMe = true,
 }: PluginProps) => {
   const [readMeContent, setReadMeContent] = React.useState("");
@@ -50,7 +40,7 @@ const Plugin = ({
       ? input
       : `${link.replace(
           "github.com",
-          "raw.githubusercontent.com"
+          "raw.githubusercontent.com",
         )}/master/${input}`;
 
   React.useEffect(() => {
@@ -95,25 +85,21 @@ const Plugin = ({
           </div>
           <div>
             <a href={`/plugin/${id}`}>
-              <h3 className="text-lg font-bold text-white">{name}</h3>
+              <h3 className="text-lg font-bold text-white hover:underline">
+                {name}
+              </h3>
               <p className="text-gray-400">{description}</p>
             </a>
           </div>
         </div>
         <div className="flex items-center gap-x-4 grow-0 shrink-0 w-full md:w-fit justify-between">
-          <div className="flex gap-x-1">
-            <div>
-              <FontAwesomeIcon icon={faStar} size="1x" />
-            </div>
-            <p>{stars}</p>
-          </div>
           <button
             type="button"
             className={clsx(
               "whitespace-nowrap py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold  focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800",
               {
                 hidden: !hideReadMe,
-              }
+              },
             )}
             data-hs-overlay={`#p-${id}`}
             onClick={() => setIsOpen(true)}
@@ -125,15 +111,10 @@ const Plugin = ({
       </div>
       <div className="mt-4 sm:pl-0 md:pl-12 flex justify-between flex-wrap gap-y-4">
         <div className="flex gap-x-4">
-          {tag1 && <Tag text={tag1} />}
-          {tag2 && (
-            <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-red-100 text-red-800">
-              {tag2}
-            </span>
-          )}
+          {tags?.map((tag) => <Tag text={tag} />)}
         </div>
         <a
-          className="inline-flex items-center gap-2 text-sm font-medium text-white"
+          className="inline-flex items-center gap-2 text-sm font-medium text-white hover:underline"
           href={link}
           target="_blank"
         >

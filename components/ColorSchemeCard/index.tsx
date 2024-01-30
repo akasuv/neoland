@@ -30,17 +30,10 @@ export type ColorSchemeCardProps = {
   id: string;
 };
 
-("use client");
 const ColorShemeCard = ({
   name,
   description,
-  author,
   link,
-  last_updated,
-  stars,
-  avatar,
-  tag1,
-  tag2,
   id,
 }: ColorSchemeCardProps) => {
   const [readMeContent, setReadMeContent] = React.useState("");
@@ -52,7 +45,7 @@ const ColorShemeCard = ({
       ? input
       : `${link.replace(
           "github.com",
-          "raw.githubusercontent.com"
+          "raw.githubusercontent.com",
         )}/master/${input}`;
 
   React.useEffect(() => {
@@ -96,10 +89,12 @@ const ColorShemeCard = ({
           </button>
         </div>
         <a href={`/plugin/${id}`}>
-          <h3 className="text-lg font-bold text-white mt-4">{name}</h3>
+          <h3 className="text-lg font-bold text-white mt-4 hover:underline">
+            {name}
+          </h3>
           <p className="mt-2 text-gray-400">{description}</p>
         </a>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center hover:underline">
           <a
             className="inline-flex items-center gap-2 text-sm font-medium text-white"
             href={link}

@@ -1,22 +1,22 @@
-import { createClient } from "@supabase/supabase-js";
-import { Hero, PluginCard, Tag, ColorSchemeCard } from "@/components";
+import { ColorSchemeCard } from "@/components";
 import React from "react";
-import Head from "next/head";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { supabase } from "@/config";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-);
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NeoLand - Color Schemes",
+  description:
+    "The best Neovim plugin resources, the best Neovim color scheme resources",
+};
 
 async function getPluginsByTag(tag: string) {
-  const { data, error } = await supabase
-    .from("Plugins")
-    .select()
-    .filter("tag1", "eq", tag);
+  const { data } = await supabase
+    .from("all_plugins")
+    .select("*")
+    .contains("tags", [tag]);
+
   return { data };
 }
 
@@ -33,9 +33,7 @@ export default async function Home() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4 px-8 pt-12">
-            {data?.map((plugin: any) => (
-              <ColorSchemeCard {...plugin} />
-            ))}
+            {data?.map((plugin: any) => <ColorSchemeCard {...plugin} />)}
           </div>
         </div>
       </div>
