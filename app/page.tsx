@@ -1,5 +1,7 @@
-import { ColorSchemeCard, Hero, PluginCard, Search, Tag } from "@/components";
-import React from "react";
+import ColorSchemeCard from "@/components/ColorSchemeCard";
+import Hero from "@/components/Hero";
+import PluginCard from "@/components/PluginCard";
+import Search from "@/components/Search";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,8 +30,10 @@ async function getPluginsByTag(tag: string) {
 }
 
 export default async function Home() {
-  const { data: colorschemes } = await getPluginsByTag("Colorscheme");
-  const { data: pluginManagers } = await getPluginsByTag("Plugin Manager");
+  const [{ data: colorschemes }, { data: pluginManagers }] = await Promise.all([
+    getPluginsByTag("Colorscheme"),
+    getPluginsByTag("Plugin Manager"),
+  ]);
 
   return (
     <div className="bg-neutral min-h-screen pb-16">

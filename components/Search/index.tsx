@@ -2,8 +2,9 @@
 import { supabase } from "@/config";
 import clsx from "clsx";
 import React from "react";
-import { Tag } from "@/components";
+import Tag from "@/components/Tag";
 import type { Plugin } from "@/type";
+import { useDebounce } from "@/lib/useDebounce";
 
 const ListItem = ({ name, tags, id }: Plugin) => (
   <a href={`/plugin/${id}`} className="w-full">
@@ -22,29 +23,40 @@ const Search = () => {
   const [noResult, setNoResult] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  const resetSearch = () => {
-    setLoading(false);
-    setNoResult(false);
-    setResult([]);
-  };
+  const debouncedValue = useDebounce(value, 300);
 
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    resetSearch();
-    setValue(event.target.value);
+  React.useEffect(() => {
+    const searchPlugins = async () => {
+      if (!debouncedValue) {
+        setResult([]);
+        setNoResult(false);
+        setLoading(false);
+        return;
+      }
 
-    if (event.target.value) {
       setLoading(true);
       const { data } = await supabase
         .from("all_plugins")
         .select()
-        .ilike("name", `%${event.target.value}%`);
+        .ilike("name", `%${debouncedValue}%`);
 
       setLoading(false);
       if (data?.length) {
         setResult(data);
+        setNoResult(false);
       } else {
+        setResult([]);
         setNoResult(true);
       }
+    };
+
+    searchPlugins();
+  }, [debouncedValue]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    if (event.target.value) {
+      setLoading(true);
     }
   };
 

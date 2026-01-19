@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { Tag } from "@/components";
+import dynamic from "next/dynamic";
+import Tag from "@/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faBolt } from "@fortawesome/free-solid-svg-icons";
-import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -18,8 +18,16 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+const SyntaxHighlighter = dynamic(
+  () => import("react-syntax-highlighter/dist/esm/prism").then((mod) => mod.default),
+  { loading: () => <pre className="bg-gray-900 p-4 rounded overflow-x-auto">Loading...</pre> }
+);
+
+const coldarkDarkPromise = import("react-syntax-highlighter/dist/esm/styles/prism").then(
+  (mod) => mod.coldarkDark
+);
+
+const LANGUAGE_REGEX = /language-(\w+)/;
 
 export type PluginProps = {
   name: string;
@@ -29,6 +37,64 @@ export type PluginProps = {
   id: string;
   hideReadMe?: boolean;
 };
+
+type MarkdownContentProps = {
+  content: string;
+  transformImageUri: (input: string) => string;
+};
+
+const MarkdownContent = React.memo(function MarkdownContent({
+  content,
+  transformImageUri,
+}: MarkdownContentProps) {
+  const [syntaxStyle, setSyntaxStyle] = React.useState<Record<string, React.CSSProperties> | null>(null);
+
+  React.useEffect(() => {
+    coldarkDarkPromise.then(setSyntaxStyle);
+  }, []);
+
+  return (
+    <ReactMarkdown
+      className="prose markdown"
+      components={{
+        code({ node, className, children, ...props }) {
+          const match = LANGUAGE_REGEX.exec(className || "");
+          const isInline = !match;
+          return !isInline && match && syntaxStyle ? (
+            <SyntaxHighlighter
+              style={syntaxStyle}
+              language={match[1]}
+              PreTag="div"
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          );
+        },
+      }}
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
+      urlTransform={transformImageUri}
+    >
+      {content}
+    </ReactMarkdown>
+  );
+});
+
+const LoadingSpinner = () => (
+  <div className="flex justify-center">
+    <div
+      className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+      role="status"
+      aria-label="loading"
+    >
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+);
 
 const Plugin = ({
   id,
@@ -42,13 +108,13 @@ const Plugin = ({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const transformImageUri = (input: string) =>
-    /^https?:/.test(input)
-      ? input
-      : `${link.replace(
-          "github.com",
-          "raw.githubusercontent.com",
-        )}/master/${input}`;
+  const transformImageUri = React.useCallback(
+    (input: string) =>
+      /^https?:/.test(input)
+        ? input
+        : `${link.replace("github.com", "raw.githubusercontent.com")}/master/${input}`,
+    [link]
+  );
 
   React.useEffect(() => {
     const rawContentLink =
@@ -66,36 +132,6 @@ const Plugin = ({
         });
     }
   }, [isOpen, hideReadMe, link]);
-
-  const MarkdownContent = () => (
-    <ReactMarkdown
-      className="prose markdown"
-      components={{
-        code({ node, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || "");
-          const isInline = !match;
-          return !isInline && match ? (
-            <SyntaxHighlighter
-              style={coldarkDark}
-              language={match[1]}
-              PreTag="div"
-            >
-              {String(children).replace(/\n$/, "")}
-            </SyntaxHighlighter>
-          ) : (
-            <code className={className} {...props}>
-              {children}
-            </code>
-          );
-        },
-      }}
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
-      urlTransform={transformImageUri}
-    >
-      {readMeContent}
-    </ReactMarkdown>
-  );
 
   return (
     <div
@@ -175,19 +211,11 @@ const Plugin = ({
           <div className="flex-1 overflow-y-auto p-4">
             {isLoading ? (
               <div className="h-64 flex flex-col justify-center items-center">
-                <div className="flex justify-center">
-                  <div
-                    className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-                    role="status"
-                    aria-label="loading"
-                  >
-                    <span className="sr-only">Loading...</span>
-                  </div>
-                </div>
+                <LoadingSpinner />
               </div>
-            ) : (
-              readMeContent && <MarkdownContent />
-            )}
+            ) : readMeContent ? (
+              <MarkdownContent content={readMeContent} transformImageUri={transformImageUri} />
+            ) : null}
           </div>
           <DialogFooter className="border-t border-gray-700 pt-3">
             <DialogClose asChild>
@@ -206,24 +234,14 @@ const Plugin = ({
         isLoading ? (
           <div className="h-[400px] flex flex-col border-t py-4 mt-8 bg-gray-800 border-gray-700">
             <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
-              <div className="flex justify-center">
-                <div
-                  className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-                  role="status"
-                  aria-label="loading"
-                >
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </div>
+              <LoadingSpinner />
             </div>
           </div>
-        ) : (
-          readMeContent && (
-            <div className="border-t py-4 mt-8 border-gray-700 overflow-x-auto">
-              <MarkdownContent />
-            </div>
-          )
-        )
+        ) : readMeContent ? (
+          <div className="border-t py-4 mt-8 border-gray-700 overflow-x-auto">
+            <MarkdownContent content={readMeContent} transformImageUri={transformImageUri} />
+          </div>
+        ) : null
       ) : null}
     </div>
   );

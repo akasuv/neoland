@@ -1,13 +1,6 @@
-"use client";
-
 import "./globals.css";
-import React from "react";
-import { Analytics } from "@/components";
-import posthog from "posthog-js";
-
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY as string, {
-  api_host: "https://us.posthog.com",
-});
+import Analytics from "@/components/Analytics";
+import PostHogProvider from "@/components/PostHogProvider";
 
 export default function RootLayout({
   children,
@@ -20,6 +13,7 @@ export default function RootLayout({
       <body className="bg-slate-900">
         {children}
         <Analytics />
+        <PostHogProvider />
       </body>
     </html>
   );
