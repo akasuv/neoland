@@ -33,7 +33,7 @@ export default async function Home() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4 px-8 pt-12">
-            {data?.map((plugin: any) => <ColorSchemeCard {...plugin} />)}
+            {data?.map((plugin: any) => <ColorSchemeCard key={plugin.id} {...plugin} />)}
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const NavItem = ({
   href,
@@ -13,8 +15,8 @@ const NavItem = ({
   active: boolean;
 }) => (
   <Link
-    className={clsx(
-      "py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-xl  whitespace-nowrap text-gray-400 hover:text-white hs-tab-active:text-blue-600 capitalize",
+    className={cn(
+      "py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-xl whitespace-nowrap text-gray-400 hover:text-white capitalize",
       active && "active"
     )}
     href={href}
@@ -30,10 +32,9 @@ const routes = [
 ];
 
 const SideMenu = () => {
-  const router = useRouter();
   const pathname = usePathname();
   return (
-    <div className="drawer drawer-mobile">
+    <div>
       <nav className="-mr-0.5 flex flex-col space-y-2">
         {routes.map((route) => (
           <NavItem

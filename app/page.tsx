@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { supabase } from "@/config";
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "NeoLand",
@@ -42,7 +44,7 @@ export default async function Home() {
           </a>
         </div>
         <div className="w-[200px]">
-          <img src="neoland.svg" width="100%" />
+          <Image src="/neoland.svg" width={200} height={200} alt="NeoLand Logo" />
         </div>
         <a
           className="flex items-center gap-x-2"
@@ -67,30 +69,30 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4">
             {colorschemes?.map((plugin: any) => (
-              <ColorSchemeCard {...plugin} />
+              <ColorSchemeCard key={plugin.id} {...plugin} />
             ))}
           </div>
-          <a
+          <Link
             className="mt-4 py-3 self-center max-w-fit bg-gradient-to-r from-sky-500 to-indigo-500 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm "
             href="/color-schemes"
           >
             All Color Schemes
             <FontAwesomeIcon icon={faAngleRight} size="sm" />
-          </a>
+          </Link>
         </div>
       </div>
       <main className="w-full flex flex-col items-center">
         <div className="flex flex-col gap-y-4 p-8 mx-auto w-full">
           <h2 className="text-2xl font-semibold">Plugin Manager</h2>
-          {pluginManagers?.map((plugin: any) => <PluginCard {...plugin} />)}
+          {pluginManagers?.map((plugin: any) => <PluginCard key={plugin.id} {...plugin} />)}
         </div>
-        <a
+        <Link
           className="mt-4 py-3 self-center max-w-fit bg-gradient-to-r from-sky-500 to-indigo-500 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm "
           href="/plugins"
         >
           Plugin Hunt !
           <FontAwesomeIcon icon={faAngleRight} size="sm" />
-        </a>
+        </Link>
       </main>
     </div>
   );

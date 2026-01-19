@@ -5,7 +5,7 @@ import {
   faCube,
   faBookTanakh,
 } from "@fortawesome/free-solid-svg-icons";
-import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ const sections = [
 const Hero = () => (
   <div className="flex gap-4 w-full justify-center flex-col md:flex-row items-center">
     {sections.map((section) => (
-      <Link href={section.href} className="grow max-w-[280px] w-full ">
+      <Link key={section.href} href={section.href} className="grow max-w-[280px] w-full ">
         <Card title={section.title} icon={section.icon} />
       </Link>
     ))}

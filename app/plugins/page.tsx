@@ -20,7 +20,7 @@ const Plugins = async () => {
 
   return (
     <div className="px-4 flex flex-col gap-y-4 w-full grow-0">
-      {data?.map((plugin: any) => <PluginCard {...plugin} />)}
+      {data?.map((plugin: any) => <PluginCard key={plugin.id} {...plugin} />)}
     </div>
   );
 };

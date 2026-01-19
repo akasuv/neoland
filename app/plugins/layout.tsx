@@ -1,14 +1,49 @@
+"use client";
+
 import { Tag } from "@/components";
 import React from "react";
-import { supabase } from "@/config";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
-async function getTags() {
-  const { data } = await supabase.from("all_tags").select();
-  return { data };
-}
+const NavLinks = () => (
+  <>
+    <Link href="/color-schemes">
+      <p>Color Schemes</p>
+    </Link>
+    <Link href="/plugins">
+      <p>Plugins</p>
+    </Link>
+    <a href="https://neovim.io">
+      <p>Neovim</p>
+    </a>
+    <a href="https://github.com/akasuv/neoland">
+      <p>GitHub</p>
+    </a>
+  </>
+);
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const tags = await getTags();
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const [tags, setTags] = React.useState<{ name: string }[]>([]);
+
+  React.useEffect(() => {
+    const fetchTags = async () => {
+      const { createClient } = await import("@supabase/supabase-js");
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY as string
+      );
+      const { data } = await supabase.from("all_tags").select();
+      if (data) setTags(data);
+    };
+    fetchTags();
+  }, []);
+
   return (
     <div>
       <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm py-4 sticky top-0 transition-colors duration-300 bg-slate-900">
@@ -17,62 +52,34 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <a
-              className="flex-none text-xl font-semibold dark:text-white"
+            <Link
+              className="flex-none text-xl font-semibold text-white"
               href="/"
             >
               NeoLand
-            </a>
+            </Link>
             <div className="sm:hidden">
-              <button
-                type="button"
-                className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                data-hs-collapse="#navbar-collapse-basic"
-                aria-controls="navbar-collapse-basic"
-                aria-label="Toggle navigation"
-              >
-                <svg
-                  className="hs-collapse-open:hidden w-4 h-4"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                  />
-                </svg>
-                <svg
-                  className="hs-collapse-open:block hidden w-4 h-4"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </button>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray-800 hover:bg-slate-800 border-gray-700 text-gray-400 hover:text-white"
+                  >
+                    <Menu className="w-4 h-4" />
+                    <span className="sr-only">Toggle navigation</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="bg-slate-900 border-gray-700">
+                  <div className="flex flex-col gap-5 mt-8">
+                    <NavLinks />
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
-          <div
-            id="navbar-collapse-basic"
-            className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block sm:w-auto sm:basis-auto"
-          >
-            <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
-              <a href="/color-schemes">
-                <p>Color Schemes</p>
-              </a>
-              <a href="/plugins">
-                <p>Plugins</p>
-              </a>
-              <a href="https://neovim.io">
-                <p>Neovim</p>
-              </a>
-              <a href="https://github.com/akasuv/neoland">
-                <p>GitHub</p>
-              </a>
-            </div>
+          <div className="hidden sm:flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
+            <NavLinks />
           </div>
         </nav>
       </header>
@@ -82,7 +89,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <div className="flex gap-x-4 w-full px-8 flex-col md:flex-row">
         <div className="flex flex-col md:w-80 grow-0 shrink-0 p-4 gap-y-4 w-full mb-8">
           <div className="flex flex-wrap gap-4 w-full">
-            {tags?.data?.map((tag) => <Tag text={tag.name} />)}
+            {tags?.map((tag) => <Tag key={tag.name} text={tag.name} />)}
           </div>
         </div>
         <div className="grow">{children}</div>

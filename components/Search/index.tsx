@@ -73,7 +73,7 @@ const Search = () => {
             onMouseLeave={() => setIsHovered(false)}
           >
             {value && result.length > 0 ? (
-              result.map((item) => <ListItem {...item} />)
+              result.map((item) => <ListItem key={item.id} {...item} />)
             ) : (
               <li className="p-4 text-sm text-gray-400">
                 {loading

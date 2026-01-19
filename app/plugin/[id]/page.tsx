@@ -9,12 +9,12 @@ async function getPluginById(id: string) {
 }
 
 type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.id;
+  const { id } = await params;
 
   const { data } = await getPluginById(id);
 
@@ -25,7 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const PluginPage = async ({ params }: Props) => {
-  const { data } = await getPluginById(params.id);
+  const { id } = await params;
+  const { data } = await getPluginById(id);
   return (
     <div className="p-4">
       {data && <PluginCard {...data[0]} hideReadMe={false} />}
